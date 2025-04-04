@@ -27,7 +27,6 @@
     <Folder Include="DTOs\" />
     <Folder Include="Services\" />
     <Folder Include="UnitOfWork\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
