@@ -26,7 +26,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="DTOs\" />
     <Folder Include="Services\" />
-    <Folder Include="UnitOfWork\" />
   </ItemGroup>
 
 </Project>
