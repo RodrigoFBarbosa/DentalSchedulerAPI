@@ -1,13 +1,17 @@
-﻿namespace DentalSchedulerAPI.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class PatientDto
+namespace DentalSchedulerAPI.DTOs;
+
+public class CreatePatientDto
 {
-    public Guid Id { get; set; }
+    [Required]
     public string? Name { get; set; }
+    [Required]
     public string? CPF { get; set; }
+    [Required]
     public DateTime BirthDate { get; set; }
+    [Phone]
     public string? Phone { get; set; }
+    [EmailAddress]
     public string? EmailAddress { get; set; }
-    
-
 }
