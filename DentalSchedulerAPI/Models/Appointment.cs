@@ -6,7 +6,7 @@ namespace DentalSchedulerAPI.Models;
 public class Appointment
 {
     [Key]
-    public Guid Id { get; set; } = new Guid();
+    public Guid Id { get; set; } = Guid.NewGuid();
     [Required]
     [ForeignKey("Patient")]
     public Guid PatientId { get; set; }
@@ -15,6 +15,8 @@ public class Appointment
     [ForeignKey("Dentist")]
     public Guid DentistId { get; set; }
     public Dentist? Dentist { get; set; }
+    [Required]
+    public DateTime AppointmentDate { get; set; }
     [Required]
     public string? Status { get; set; } = "Agendado";
 }
