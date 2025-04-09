@@ -14,4 +14,13 @@ public class ApplicationDbContext : DbContext
     public DbSet<Dentist> Dentists { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Appointment>()
+            .Property(a => a.Id)
+            .HasDefaultValueSql("gen_random_uuid()");
+    }
+
 }
