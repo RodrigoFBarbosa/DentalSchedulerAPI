@@ -39,9 +39,6 @@ public class AppointmentController : ControllerBase
     {
         var createdAppointment = await _appointmentService.CreateAsync(dto);
 
-        if (createdAppointment == null)
-            return Conflict("Este horário já está ocupado para o dentista selecionado.");
-
         return CreatedAtRoute(
             routeName: "GetAppointmentById",
             routeValues: new { id = createdAppointment.Id },

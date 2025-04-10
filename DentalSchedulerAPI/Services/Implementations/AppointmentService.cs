@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DentalSchedulerAPI.DTOs;
+using DentalSchedulerAPI.Exceptions;
 using DentalSchedulerAPI.Models;
 using DentalSchedulerAPI.Services.Interfaces;
 using DentalSchedulerAPI.UnitOfWork;
@@ -19,7 +20,8 @@ public class AppointmentService : IAppointmentService
 
     public async Task<AppointmentDto> CreateAsync(CreateAppointmentDto dto)
     {
-        dto.AppointmentDate = dto.AppointmentDate
+
+        var normalizedDate = dto.AppointmentDate = dto.AppointmentDate
         .ToUniversalTime()
         .AddTicks(-(dto.AppointmentDate.Ticks % TimeSpan.TicksPerMinute));
 
@@ -27,9 +29,11 @@ public class AppointmentService : IAppointmentService
         .FindAsync(a => a.DentistId == dto.DentistId && a.AppointmentDate == dto.AppointmentDate);
 
         if (existingAppointment.Any())
-            return null;
+            throw new ConflictException("Já existe um agendamento para esse dentista nesse horário.");
 
         var appointment = _mapper.Map<Appointment>(dto);
+        appointment.AppointmentDate = normalizedDate;
+
         await _unitOfWork.Appointments.AddAsync(appointment);
         await _unitOfWork.CommitAsync();
 
@@ -74,7 +78,7 @@ public class AppointmentService : IAppointmentService
     {
         var appointment = await _unitOfWork.Appointments.GetByIdAsync(id);
         if (appointment == null)
-            return null;
+            throw new NotFoundException("Agendamento não encontrado.");
 
         var dto = _mapper.Map<AppointmentDto>(appointment);
         dto.PatientName = (await _unitOfWork.Patients.GetByIdAsync(dto.PatientId))?.Name;
