@@ -1,5 +1,6 @@
 ﻿using DentalSchedulerAPI.DTOs;
 using DentalSchedulerAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
