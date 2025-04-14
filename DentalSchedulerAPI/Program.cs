@@ -1,5 +1,6 @@
 using DentalSchedulerAPI.Data;
 using DentalSchedulerAPI.Mappings;
+using DentalSchedulerAPI.Models;
 using DentalSchedulerAPI.Repositories.Implementations;
 using DentalSchedulerAPI.Repositories.Interfaces;
 using DentalSchedulerAPI.Services.Implementations;
@@ -8,8 +9,12 @@ using DentalSchedulerAPI.UnitOfWork;
 using DentalSchedulerAPI.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,3 +60,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
