@@ -1,5 +1,6 @@
 ﻿using DentalSchedulerAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DentalSchedulerAPI.Data;
 
